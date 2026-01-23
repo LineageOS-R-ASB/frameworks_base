@@ -2283,13 +2283,13 @@ public class PhoneWindowManager implements WindowManagerPolicy {
     private void updateKeyAssignments() {
         int activeHardwareKeys = mDeviceHardwareKeys;
 
-        if (mForceNavbar == 1) {
-            activeHardwareKeys = 0;
-        }
-
         final boolean hasMenu = (activeHardwareKeys & KEY_MASK_MENU) != 0;
         final boolean hasAssist = (activeHardwareKeys & KEY_MASK_ASSIST) != 0;
         final boolean hasAppSwitch = (activeHardwareKeys & KEY_MASK_APP_SWITCH) != 0;
+
+        if (mForceNavbar == 1) {
+            activeHardwareKeys = hasAssist ? 8 : 0;
+        }
 
         final ContentResolver resolver = mContext.getContentResolver();
         final Resources res = mContext.getResources();
